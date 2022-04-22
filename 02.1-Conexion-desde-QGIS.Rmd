@@ -75,7 +75,7 @@ Aun así, no todas las páginas de ese tipo son intentos de robos, puede que la 
 
 ¿Que tan segura es la criptografia?
 
-![](02.2/secutiry.png)
+![](02.2/security.png)
 
 #### Ingresar credenciales
 
