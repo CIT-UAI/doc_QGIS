@@ -73,6 +73,10 @@ Aun así, no todas las páginas de ese tipo son intentos de robos, puede que la 
 
 "Da lo mismo que la página que veamos se parezca al banco, al mail o similar, confía más en el candado SSL que a lo que ve la vista. Confía más en la tecnología de criptografía o encriptación antes que la apariencia."
 
+¿Que tan segura es la criptografia?
+
+![](02.2/secutiry.png)
+
 #### Ingresar credenciales
 
 ![](02.2/03.png)
