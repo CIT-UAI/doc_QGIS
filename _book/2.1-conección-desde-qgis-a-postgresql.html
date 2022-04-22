@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.1 Conección desde QGIS a PostgreSQL | Documentación de R</title>
+  <meta name="description" content="Piloto de documentación con Bookdown" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.1 Conección desde QGIS a PostgreSQL | Documentación de R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Piloto de documentación con Bookdown" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.1 Conección desde QGIS a PostgreSQL | Documentación de R" />
+  
+  <meta name="twitter:description" content="Piloto de documentación con Bookdown" />
+  
+
+<meta name="author" content="Equipo de Investigación (?)" />
+
+
+<meta name="date" content="2022-04-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="2-sql.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Documentación CIT</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#prefacio">Prefacio<span></span></a></li>
+<li class="chapter" data-level="1" data-path="1-introduccion.html"><a href="1-introduccion.html"><i class="fa fa-check"></i><b>1</b> Introduccion<span></span></a></li>
+<li class="chapter" data-level="2" data-path="2-sql.html"><a href="2-sql.html"><i class="fa fa-check"></i><b>2</b> SQL<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-conección-desde-qgis-a-postgresql.html"><a href="2.1-conección-desde-qgis-a-postgresql.html"><i class="fa fa-check"></i><b>2.1</b> Conección desde QGIS a PostgreSQL<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="2.1-conección-desde-qgis-a-postgresql.html"><a href="2.1-conección-desde-qgis-a-postgresql.html#crear-conección"><i class="fa fa-check"></i><b>2.1.1</b> Crear Conección<span></span></a></li>
+<li class="chapter" data-level="2.1.2" data-path="2.1-conección-desde-qgis-a-postgresql.html"><a href="2.1-conección-desde-qgis-a-postgresql.html#cargar-mapas-desde-postgis"><i class="fa fa-check"></i><b>2.1.2</b> Cargar mapas desde PostGIS<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documentación de R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conección-desde-qgis-a-postgresql" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Conección desde QGIS a PostgreSQL<a href="2.1-conección-desde-qgis-a-postgresql.html#conección-desde-qgis-a-postgresql" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="crear-conección" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Crear Conección<a href="2.1-conección-desde-qgis-a-postgresql.html#crear-conección" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Para poder conectarse a PostgreSQL o a cualquier base de datos, debemos crear la conección desde QGIS, para eso, tenemos que indicarle los siguientes datos:</p>
+<ul>
+<li>IP/URL del Servidor</li>
+<li>Credenciales</li>
+<li>Usuario</li>
+<li>Clave</li>
+<li>Nombre de la base de datos a la cual nos conectaremos</li>
+<li>Puerto, usualmente es el 5432 para PostgreSQL pero puede cambiar dependiendo del servidor</li>
+</ul>
+<p>Para comenzar vamos a QGIS y seguimos los siguientes pasos, los cuales solo debemos hacer la primera vez, siempre y cuando elijamos recordar el usuario y la clave, en caso de no recordarlos, cuando queramos conectarnos nos va a pedir nuevamente el usuario o la clave dependiendo de que le indicamos que recuerde.</p>
+<div id="abrir-interfaz-para-añadir-mapa-postgis" class="section level4 hasAnchor" number="2.1.1.1">
+<h4><span class="header-section-number">2.1.1.1</span> Abrir interfaz para añadir mapa Postgis<a href="2.1-conección-desde-qgis-a-postgresql.html#abrir-interfaz-para-añadir-mapa-postgis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="02.2/01.png" /></p>
+<ol style="list-style-type: decimal">
+<li><p>En el panel de herramientas izquierdo hacemos click en el icono de PostgreSQL</p></li>
+<li><p>Hacemos click en “Nueva” para crear una conección a una base de datos de un servidor</p></li>
+</ol>
+</div>
+<div id="ingresar-datos-del-servidor" class="section level4 hasAnchor" number="2.1.1.2">
+<h4><span class="header-section-number">2.1.1.2</span> Ingresar datos del servidor<a href="2.1-conección-desde-qgis-a-postgresql.html#ingresar-datos-del-servidor" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="02.2/02.png" /></p>
+<p>Debemos indicar dónde se encuentra el servidor, estos datos tenemos que tenerlos antes, si no los tienes consultalos para poder avanzar.</p>
+<p>El único punto que debemos tener consideración es en el Modo SSL.</p>
+<div id="ssl-y-seguridad-de-la-información" class="section level5 hasAnchor" number="2.1.1.2.1">
+<h5><span class="header-section-number">2.1.1.2.1</span> SSL y Seguridad de la información<a href="2.1-conección-desde-qgis-a-postgresql.html#ssl-y-seguridad-de-la-información" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>¿Qué es el modo SSL? Antes de entrar en el SSL, vamos a ver como funciona el internet sin SSL, ya que no todas las páginas lo usan.</p>
+<p><img src="02.2/without_ssl.png" /></p>
+<p>Cuando nos comunicamos con un servidor o cualquier otro dispositivo de internet o alguna red, todo lo que hacemos, escribimos, posteamos, todo se envía al internet, y como vemos todos los datos están expuestos, debido a eso, para cuando se usan datos sensibles como la clave de una cuenta bancaria, se usa una conexion llamada SSL.</p>
+<p><img src="02.2/with_ssl.png" /></p>
+<p>El modo SSL, “encripta” datos, los transforma en algo que al leerlos no se sabrá que dice, y luego se los envía al destino, para finalmente este pueda “desencriptarlo” y recuperar el mensaje original, el “cómo” es este proceso no se detallará, ya que existen múltiples algoritmos mezclados con tecnología y matemática con tal de asegurar lo más posible que los datos no puedan ser recuperados excepto por el emisor y receptor del mensaje.</p>
+<p>Este modo es ideal cuando trabajamos con datos sensibles, sin embargo, por más seguro que sea, tiene un precio, tiempo y poder computacional con tal de “encriptar” y “desencriptar”, y mientras con más datos trabajemos, mas lento sera este proceso, debido a ello únicamente en algunas circunstancias es posible trabajar con datos sensibles sin SSL.</p>
+<p>Si estamos trabajando desde la red del trabajo, osea tenemos el servidor de PostgreSQL al lado nuestro, o estamos usando algún servicio como VPN o red privada, si tenemos alguna opción que da seguridad a nuestra red y conexión, podemos evitar usar el modo SSL.</p>
+<p>Si estamos sin protección alguna, o fuera del área de trabajo, el modo SSL es obligatorio, ¿qué pasa si no uso SSL y estoy en un lugar público?</p>
+<p>En esencia, sin SSL cualquiera con conocimientos de TI podrá leer todo lo que hagas y escribas en la red, no es problema si lo leen personas del trabajo en caso de ser información pública a la empresa, pero en un lugar público conlleva:</p>
+<ul>
+<li>Posible robo de credenciales del servidor</li>
+<li>Posible robo de información del servidor</li>
+<li>Posible alteración de la información enviada o recibida al/del servidor</li>
+<li>Posible hackeo al servidor</li>
+</ul>
+<p>“Esto me da miedo, nunca me he preocupado por usar SSL, no sabía que existía y he entrado al banco y mail ¿como no me han robado antes mis datos?”</p>
+<p>Es por que en el internet, SSL hoy en día es un estándar, en este tiempo al menos toda página que tenga datos sensibles usará SSL por defecto, incluso páginas que tampoco tienen datos sensibles lo usan, de esa manera te puedes conectar de forma segura incluso en lugares públicos.</p>
+<p>Cuando entras a una página web puedes ver lo siguiente.</p>
+<p><img src="02.2/ssl.png" /></p>
+<p>El candado indica que estás navegando por SSL y que la conexión es segura, si alguna vez navegamos a una página y el candado no esta, o esta rojo o el navegador indica “La página no es segura”, el posible que estén tratando de robar información, es uno de los métodos preferido para robar por ejemplo, cuentas bancarias.</p>
+<p>Aun así, no todas las páginas de ese tipo son intentos de robos, puede que la página sea oficial, pero se les olvidó renovar el certificado, pero como no podemos distinguirlo de un robo de información o similar sigamos el siguiente criterio.</p>
+<p>Únicamente escribir información sensible si la página web:
+* Usa SSL osea que el candado esté
+* Que el candado no este rojo o con alguna advertencia
+* Sin advertencias del navegador</p>
+<p>“Da lo mismo que la página que veamos se parezca al banco, al mail o similar, confía más en el candado SSL que a lo que ve la vista. Confía más en la tecnología de criptografía o encriptación antes que la apariencia.”</p>
+<p>¿Que tan segura es la criptografia?</p>
+<p><img src="02.2/secutiry.png" /></p>
+</div>
+</div>
+<div id="ingresar-credenciales" class="section level4 hasAnchor" number="2.1.1.3">
+<h4><span class="header-section-number">2.1.1.3</span> Ingresar credenciales<a href="2.1-conección-desde-qgis-a-postgresql.html#ingresar-credenciales" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="02.2/03.png" /></p>
+<p>En este paso vamos a ingresar el usuario y la clave del servidor, además, si lo vamos a usar de forma continua podemos tickear “Guardar” para el usuario y la clave, ya que por cada intento de conexión solicitará los datos no guardados.</p>
+</div>
+<div id="probar-la-conección" class="section level4 hasAnchor" number="2.1.1.4">
+<h4><span class="header-section-number">2.1.1.4</span> Probar la conección<a href="2.1-conección-desde-qgis-a-postgresql.html#probar-la-conección" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="02.2/04.png" /></p>
+<p>Antes de proceder a cargar mapas, es bueno revisar que los datos que ingresamos estén correctos, para eso hacemos click al botón “Probar conexión” y después de un poco de tiempo debería aparecer un mensaje indicando que la conexión fue exitosa.</p>
+<p>En caso de que falle, intentar volver a escribir y verificar los datos tanto del servidor como las credenciales, si aun así no se logra la conexión, comunicarse con TI.</p>
+<p>Finalmente vamos a hacer click para guardar la conexión.</p>
+<p>Si decidimos guardar las credenciales aparecerá el siguiente mensaje:</p>
+<p><img src="02.2/05.png" /></p>
+<p>QGIS guarda los datos en un archivo, tal cual, eso causa que cualquier persona con acceso al computador pueda recuperar las credenciales, por lo que se debe tener precaución.</p>
+<p>Antes que guiarnos por el miedo, podemos tomar las siguientes precauciones:</p>
+<ul>
+<li>Mantengamos el computador con clave</li>
+<li>Evitar que personas ajenas tengan acceso al computador</li>
+<li>Si roban el computador, avisar al área de TI para cambiar las claves</li>
+</ul>
+<p>Nada es perfecto, sin embargo obtenemos un gran margen de seguridad manteniendo estas consideraciones.</p>
+<!-- Se siente muy fuera de lugar -->
+<p>Por si lo notan, incluso en caso de perder el PC es posible mantener la información segura solo con un cambio de clave del servidor, a diferencia de mantener archivos en el PC que usualmente son más vulnerables.</p>
+<p>Con esto, hemos guardado la conexión y podemos acceder al servidor y su base de datos.</p>
+</div>
+</div>
+<div id="cargar-mapas-desde-postgis" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Cargar mapas desde PostGIS<a href="2.1-conección-desde-qgis-a-postgresql.html#cargar-mapas-desde-postgis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cargar mapas es bastante simple, muy similar a un archivo una vez que realizamos los procedimientos previos.</p>
+<div id="conectarse-al-servidor" class="section level4 hasAnchor" number="2.1.2.1">
+<h4><span class="header-section-number">2.1.2.1</span> Conectarse al servidor<a href="2.1-conección-desde-qgis-a-postgresql.html#conectarse-al-servidor" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="02.2/06.png" /></p>
+<ol style="list-style-type: decimal">
+<li>Seleccionamos la conexión, tendrá el nombre que elegimos en la sección anterior.</li>
+<li>Seleccionamos “Conectar”, si no guardamos el usuario y/o clave del servidor, las volverá a solicitar.</li>
+</ol>
+</div>
+<div id="seleccionar-y-añadir-mapas" class="section level4 hasAnchor" number="2.1.2.2">
+<h4><span class="header-section-number">2.1.2.2</span> Seleccionar y añadir Mapas<a href="2.1-conección-desde-qgis-a-postgresql.html#seleccionar-y-añadir-mapas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="02.2/07.png" /></p>
+<p>Con la conexión realizada veremos una lista con los esquemas del servidor, como idea general, cada esquema es una carpeta que contiene varios shp o mapas, ayuda a ordenar y clasificar, por defecto, los servidores usan el esquema “public” para guardar todo ahí a menos que indiquemos otro.</p>
+<p><img src="02.2/08.png" /></p>
+<p>Al expandir el esquema, podremos ver todos los mapas que contiene, ahora solo tenemos que añadir los que deseamos ver en QGIS.</p>
+<p><img src="02.2/09.png" /></p>
+<p>Como podemos notar, tenemos varias formas de seleccionar mapas:</p>
+<ul>
+<li>Click a un mapa.</li>
+<li>Mantener el botón izquierdo del mouse y arrastrarlo, se seleccionarán todos los mapas por los que pasemos.</li>
+</ul>
+<p>Si además mantenemos la tecla “Ctrl”, podemos añadir nuevas selecciones de mapas, manteniendo los mapas ya seleccionados.</p>
+<p>Una vez seleccionamos los mapas de interés, hacemos click al botón “Añadir”, la ventana no se cerrará por si quieres añadir más mapas aún.</p>
+<p>Es posible seleccionar directamente el esquema “public” o el que desees y añadir todos sus mapas a QGIS.</p>
+<p>Una vez con todos los mapas cargados hacemos click en “Close” para salir de la interfaz para añadir mapas.</p>
+</div>
+<div id="usar-mapas-de-la-forma-usual" class="section level4 hasAnchor" number="2.1.2.3">
+<h4><span class="header-section-number">2.1.2.3</span> Usar mapas de la forma usual<a href="2.1-conección-desde-qgis-a-postgresql.html#usar-mapas-de-la-forma-usual" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="02.2/10.png" /></p>
+<p>Como vemos en la imagen, todos los mapas han sido cargados y podemos usar QGIS de forma usual.</p>
+<p>Si no puedes editar mapas, puede que no tengas credenciales para hacerlo, en todo caso, comunicarse con el área de TI para mayor información.</p>
+
+</div>
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="2-sql.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02.1-Conexion-desde-QGIS.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

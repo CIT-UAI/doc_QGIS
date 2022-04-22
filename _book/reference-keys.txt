@@ -1,0 +1,13 @@
+introduccion
+sql
+conección-desde-qgis-a-postgresql
+crear-conección
+abrir-interfaz-para-añadir-mapa-postgis
+ingresar-datos-del-servidor
+ssl-y-seguridad-de-la-información
+ingresar-credenciales
+probar-la-conección
+cargar-mapas-desde-postgis
+conectarse-al-servidor
+seleccionar-y-añadir-mapas
+usar-mapas-de-la-forma-usual
